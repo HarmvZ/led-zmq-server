@@ -7,4 +7,4 @@ COPY . /home/docker/code/
 
 EXPOSE 5555
 
-CMD ["python", "/home/docker/code/app/rpc_server.py"]
+CMD ["python", "/home/docker/code/app/zmq_server.py"]
