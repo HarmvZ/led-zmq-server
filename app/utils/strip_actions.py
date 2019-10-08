@@ -14,7 +14,7 @@ from settings import (
     MATRIX_WIDTH,
     NUMBERS,
     CLOCK_FOREGROUND_COLOR,
-    CLOCK_BACKGROUND_COLOR
+    CLOCK_BACKGROUND_COLOR,
 )
 from utils.bit24_to_3_bit8 import bit24_to_3_bit8
 from utils.stoppable_thread import StoppableThread
@@ -22,6 +22,7 @@ from utils.core_actions import fill_colors, color_wipe
 from threads.ClockThread import ClockThread
 from threads.TransitionThread import TransitionThread
 from threads.AnimationThread import AnimationThread
+from threads.AlarmThread import AlarmThread
 
 
 class StripActions:
@@ -30,7 +31,7 @@ class StripActions:
 
     def fill(self, strip, r=0, g=0, b=0):
         color_wipe(strip, Color(r, g, b))
-    
+
     def get_pixels(self, strip):
         return strip.getPixels()
 
@@ -47,7 +48,6 @@ class StripActions:
         transition.start()
         return transition
 
-
     def show_time(self, strip, fg, bg):
         fg_color = Color(fg["r"], fg["g"], fg["b"])
         bg_color = Color(bg["r"], bg["g"], bg["b"])
@@ -56,13 +56,16 @@ class StripActions:
         clock.start()
         return clock
 
-
     def animation(self, strip, animation, wait_ms):
         """Movie theater light style chaser animation."""
         animation = AnimationThread(strip, animation, wait_ms)
         animation.start()
-        return animation                            
- 
+        return animation
 
-
+    def start_alarm(self, strip, steps=18, timestep=100):
+        print("starting alarm")
+        alarm = AlarmThread(strip, steps, timestep)
+        alarm.start()
+        print("alarm started")
+        return alarm
 
