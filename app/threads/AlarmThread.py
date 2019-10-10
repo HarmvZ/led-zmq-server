@@ -1,7 +1,7 @@
 import numpy as np
 import time
-from utils.stoppable_thread import StoppableThread
 from rpi_ws281x import Color
+from utils.stoppable_thread import StoppableThread
 
 
 class AlarmThread(StoppableThread):
@@ -34,5 +34,4 @@ class AlarmThread(StoppableThread):
             time.sleep(self.timestep / 1000)
 
             # TODO add dithering, color from black -> deep orange ->  white
-        print("alarm finished")
 

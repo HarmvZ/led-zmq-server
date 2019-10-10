@@ -62,10 +62,8 @@ class StripActions:
         animation.start()
         return animation
 
-    def start_alarm(self, strip, steps=18, timestep=100):
-        print("starting alarm")
-        alarm = AlarmThread(strip, steps, timestep)
+    def start_alarm(self, strip, steps=1800, timestep=100):
+        alarm = AlarmThread(strip, steps=steps, timestep=timestep)
         alarm.start()
-        print("alarm started")
         return alarm
 
